@@ -1,4 +1,14 @@
-﻿using System.Collections;
+/*
+This script allows the user to move along the head forward vector even after the player prefab has done a snap turn or rotated another direction. Solves the tank movement issue of character control in VR. Now you will always move along the camera forward vector even if you have rotated multiple times.
+
+Basically you have to get the player rotation before applying the movement vector along the camera forward
+then you have to rotate that movement vector along the player prefab eulerAngle.y AGAIN to get the correct forward vector to move along, since you are now taking into consideration the rotation of the player and then rotating your direction vector around that.
+But you have to use a rotation matrix to make sure that your direction vector is correct which is in the RotateVector() function.
+
+Credit to https://leetdev.io/unity-vr-development/day-63-of-100-days-of-vr-rotating-a-vector-and-moving-in-the-direction-the-player-is-facing-in-unity for inspiration.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
@@ -138,6 +148,4 @@ public class JoystickMovement : MonoBehaviour
             HeadRotation();
         }
     }
-
-    
 }
